@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,51 +20,47 @@ namespace Calculator
         public MainWindow()
         {
             InitializeComponent();
+            _numberFormatInfo = NumberFormatInfo.InvariantInfo;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private bool _IsCalculationDone;
+        private bool _hasError;
+        NumberFormatInfo _numberFormatInfo;
+
+        private void OperandInput(object sender, RoutedEventArgs e)
         {
+            if(_IsCalculationDone || _hasError)
+                ClearAll(sender, e);
+
             Button btn = (Button)sender;
-            if (LowerTextBlock.Text == "0" || LowerTextBlock.Text == "Zero error division")
-            {
-                LowerTextBlock.Text = btn.Content.ToString();
-            }
-            else
-            {
-                LowerTextBlock.Text += btn.Content.ToString();
-            }
+            if (Operand.Text == "0") Operand.Text = btn.Content.ToString();
+            else Operand.Text += btn.Content.ToString();
         }
 
-        private void Button_C_Click(object sender, RoutedEventArgs e)
+        private void ClearAll(object sender, RoutedEventArgs e)
         {
-            UpperTextBlock.Text = String.Empty;
-            LowerTextBlock.Text = "0";
+            UpperTextBlock.Text = string.Empty;
+            _IsCalculationDone = _hasError = false;
+            Clear(sender,e);
         }
 
-        private void Dell_Click(object sender, RoutedEventArgs e)
+        private void DeleteChar(object sender, RoutedEventArgs e)
         {
-            if(LowerTextBlock.Text.Length == 1)
-            {
-                LowerTextBlock.Text = "0";
-            }
-            else
-            {
-                LowerTextBlock.Text = LowerTextBlock.Text.Remove(LowerTextBlock.Text.Length-1);
-            }
+            if (_IsCalculationDone || _hasError)
+                ClearAll(sender, e);
+
+            Operand.Text = Operand.Text.Length > 1 ? Operand.Text.Remove(Operand.Text.Length-1) : "0";
         }
 
-        private void CE_Click(object sender, RoutedEventArgs e)
-        {
-            LowerTextBlock.Text = "0";
-        }
+        private void Clear(object sender, RoutedEventArgs e) => Operand.Text = "0";
 
-        private void Point_Click(object sender, RoutedEventArgs e)
+        private void PointInput(object sender, RoutedEventArgs e)
         {
-            if(LowerTextBlock.Text.Contains("."))
-            {
-                return;
-            }
-            LowerTextBlock.Text += ".";
+            if (_IsCalculationDone || _hasError)
+                ClearAll(sender, e);
+
+            if (Operand.Text.Contains(_numberFormatInfo.NumberDecimalSeparator)) return;
+            Operand.Text += _numberFormatInfo.NumberDecimalSeparator;
         }
 
         private void Operation_Click(object sender, RoutedEventArgs e)
@@ -71,34 +68,39 @@ namespace Calculator
             Button btn = (Button)sender;
             if (UpperTextBlock.Text.Length == 0)
             {
-                UpperTextBlock.Text = LowerTextBlock.Text + btn.Content.ToString();
-                LowerTextBlock.Text = "0";
+                UpperTextBlock.Text = Operand.Text + btn.Content;
+                Operand.Text = "0";
             }
         }
 
         private void Equals_Click(object sender, RoutedEventArgs e)
         {
-            double.TryParse(LowerTextBlock.Text, out double y);
-            double.TryParse(UpperTextBlock.Text.Remove(UpperTextBlock.Text.Length - 1), out double x);
+            double y = double.Parse(Operand.Text, _numberFormatInfo);
+            double x =  double.Parse(UpperTextBlock.Text.Remove(UpperTextBlock.Text.Length - 1), _numberFormatInfo);
             char operation = UpperTextBlock.Text[UpperTextBlock.Text.Length - 1];
             string result;
             switch (operation)
             {
                 case '+':
-                    result = (x + y).ToString(); break;
+                    result = (x + y).ToString(_numberFormatInfo); break;
                 case '-':
-                    result = (x - y).ToString(); break;
+                    result = (x - y).ToString(_numberFormatInfo); break;
                 case '*':
-                    result = (x * y).ToString(); break;
+                    result = (x * y).ToString(_numberFormatInfo); break;
                 case '/':
-                    result = y != 0 ? (x / y).ToString() : "Zero error division";
+                    result = y != 0 ? (x / y).ToString(_numberFormatInfo) : "Zero error division";
+                    if(result == "Zero error division")
+                        _hasError = true;
                     break;
                 default:
                     result = "Incorrect operation";
                     break;
             }
             UpperTextBlock.Text = string.Empty;
-            LowerTextBlock.Text = result;
+            Operand.Text = result;
+
+
+            _IsCalculationDone = true;
         }
     }
 }
