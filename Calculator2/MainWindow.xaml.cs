@@ -29,7 +29,7 @@ namespace Calculator
 
         private void OperandInput(object sender, RoutedEventArgs e)
         {
-            if(_IsCalculationDone || _hasError)
+            if (_IsCalculationDone || _hasError)
                 ClearAll(sender, e);
 
             Button btn = (Button)sender;
@@ -41,7 +41,7 @@ namespace Calculator
         {
             UpperTextBlock.Text = string.Empty;
             _IsCalculationDone = _hasError = false;
-            Clear(sender,e);
+            Clear(sender, e);
         }
 
         private void DeleteChar(object sender, RoutedEventArgs e)
@@ -49,7 +49,7 @@ namespace Calculator
             if (_IsCalculationDone || _hasError)
                 ClearAll(sender, e);
 
-            Operand.Text = Operand.Text.Length > 1 ? Operand.Text.Remove(Operand.Text.Length-1) : "0";
+            Operand.Text = Operand.Text.Length > 1 ? Operand.Text.Remove(Operand.Text.Length - 1) : "0";
         }
 
         private void Clear(object sender, RoutedEventArgs e) => Operand.Text = "0";
@@ -69,14 +69,14 @@ namespace Calculator
             if (UpperTextBlock.Text.Length == 0)
             {
                 UpperTextBlock.Text = Operand.Text + btn.Content;
-                Operand.Text = "0";
+                Operand.Text = "0";           
             }
         }
 
         private void Equals_Click(object sender, RoutedEventArgs e)
         {
             double y = double.Parse(Operand.Text, _numberFormatInfo);
-            double x =  double.Parse(UpperTextBlock.Text.Remove(UpperTextBlock.Text.Length - 1), _numberFormatInfo);
+            double x = double.Parse(UpperTextBlock.Text.Remove(UpperTextBlock.Text.Length - 1), _numberFormatInfo);
             char operation = UpperTextBlock.Text[UpperTextBlock.Text.Length - 1];
             string result;
             switch (operation)
