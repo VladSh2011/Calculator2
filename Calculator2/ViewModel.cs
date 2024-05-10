@@ -14,7 +14,7 @@ namespace Calculator2
         #region PrivateFields
         private MainModel _model;
         private double _num;
-        private string _operand;
+        private string _operand = "0";
         private string _operation;
         private bool _hasError;
         private bool _IsCalculationDone;
@@ -87,7 +87,7 @@ namespace Calculator2
             if (_IsCalculationDone || _hasError)
                 ClearAll(o);
 
-            if (Operand == "0") Operand = o?.ToString();
+            if (Operand == "0") Operand = o.ToString();
             else Operand += o.ToString();
         }
 
@@ -148,13 +148,10 @@ namespace Calculator2
             if (Operand != null)
             {
                 double operandParsed = double.Parse(Operand, _numberFormatInfo);
-                if (!_IsCalculationDone)
-                    _model.Operand2 = operandParsed;
-                else
-                    _model.Operand1 = operandParsed;
+                if (!_IsCalculationDone) _model.Operand2 = operandParsed;
+                else _model.Operand1 = operandParsed;
             }
-            else
-                _model.Operand2 = null;
+            else _model.Operand2 = null;
             double? result = _model.Calculate();
             if (result == null)
                 HasError = true;

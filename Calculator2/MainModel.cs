@@ -15,6 +15,7 @@ namespace Calculator2
         public char? Operator { get; set; }
         public double? Calculate()
         {
+            if(Operand1.HasValue) Operand2 = Operand2 ?? Operand1;
             switch (Operator)
             {
                 case '+': return Operand1 + Operand2;
