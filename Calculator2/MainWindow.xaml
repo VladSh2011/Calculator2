@@ -9,6 +9,45 @@
     <Window.DataContext>
         <local:ViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="0" Key="NumPad0"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="0" Key="D0"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="1" Key="NumPad1"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="1" Key="D1"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="2" Key="NumPad2"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="2" Key="D2"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="3" Key="NumPad3"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="3" Key="D3"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="4" Key="NumPad4"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="4" Key="D4"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="5" Key="NumPad5"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="5" Key="D5"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="6" Key="NumPad6"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="6" Key="D6"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="7" Key="NumPad7"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="7" Key="D7"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="8" Key="NumPad8"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="8" Key="D8"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="9" Key="NumPad9"/>
+        <KeyBinding Command="{Binding InputCommand}" CommandParameter="9" Key="D9"/>
+        <KeyBinding Command="{Binding PointInputCommand}" Key="Decimal"/>
+        <KeyBinding Command="{Binding PointInputCommand}" Key="OemComma"/>
+        <KeyBinding Command="{Binding PointInputCommand}" Key="OemPeriod"/>
+        <KeyBinding Command="{Binding OperationCommand}" CommandParameter="+" Key="Add"/>
+        <KeyBinding Command="{Binding OperationCommand}" CommandParameter="+" Key="OemPlus"/>
+        <KeyBinding Command="{Binding OperationCommand}" CommandParameter="-" Key="Subtract"/>
+        <KeyBinding Command="{Binding OperationCommand}" CommandParameter="-" Key="OemMinus"/>
+        <KeyBinding Command="{Binding OperationCommand}" CommandParameter="/" Key="Divide"/>
+        <KeyBinding Command="{Binding OperationCommand}" CommandParameter="/" Key="Oem2"/>
+        <KeyBinding Command="{Binding OperationCommand}" CommandParameter="*" Key="Multiply"/>
+        <KeyBinding Command="{Binding CalculateCommand}" Key="Enter"/>
+        <KeyBinding Command="{Binding DeleteCommand}" Key="Backspace"/>
+        <KeyBinding Command="{Binding ClearAllCommand}" Key="Escape"/>
+        <KeyBinding Command="{Binding ClearCommand}" Key="Delete"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -26,8 +65,10 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBlock x:Name="UpperTextBlock" Grid.ColumnSpan="4" Text="{Binding Operation, Mode=TwoWay}" Style="{StaticResource TextBlock.Style}"/>
-        <TextBlock x:Name="Operand" Text="{Binding Operand}" Grid.Row="1" Grid.ColumnSpan="4" Style="{StaticResource TextBlock.Style}"/>
+        <TextBlock Grid.ColumnSpan="4" Text="{Binding Operation, Mode=TwoWay}" Style="{StaticResource TextBlock.Style}"/>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Style="{StaticResource TextBlock.Style}" Text="{Binding Operand}"/>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Style="{StaticResource TextBlock.Style}"
+                   Text="Zero division error" Visibility="{Binding HasError, Converter={StaticResource  BoolToVisibilityConverter}}"/>
         <Button Content="1" Grid.Column="0" Grid.Row="2" Command="{Binding InputCommand}" CommandParameter="1"/>
         <Button Content="2" Grid.Column="1" Grid.Row="2" Command="{Binding InputCommand}" CommandParameter="2"/>
         <Button Content="3" Grid.Column="2" Grid.Row="2" Command="{Binding InputCommand}" CommandParameter="3"/>
