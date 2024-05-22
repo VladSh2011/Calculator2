@@ -66,8 +66,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.ColumnSpan="4" Text="{Binding Operation, Mode=TwoWay}" Style="{StaticResource TextBlock.Style}"/>
-        <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Style="{StaticResource TextBlock.Style}" Text="{Binding Operand}"/>
-        <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Style="{StaticResource TextBlock.Style}"
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Style="{DynamicResource TextBlock.Style}" Text="{Binding Operand}"/>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Style="{DynamicResource TextBlock.Style}"
                    Text="Zero division error" Visibility="{Binding HasError, Converter={StaticResource  BoolToVisibilityConverter}}"/>
         <Button Content="1" Grid.Column="0" Grid.Row="2" Command="{Binding InputCommand}" CommandParameter="1"/>
         <Button Content="2" Grid.Column="1" Grid.Row="2" Command="{Binding InputCommand}" CommandParameter="2"/>
