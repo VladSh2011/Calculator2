@@ -19,6 +19,7 @@
             <Setter Property="Background" Value="Aqua"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="TextAlignment" Value="Right"/>
+            <Setter Property="Padding" Value="0,0,5,0"/>
             <!--<Setter Property="Text"-->
         </Style.Setters>
     </Style>
