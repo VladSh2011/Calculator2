@@ -9,11 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Calculator_30001.ico" />
     <None Remove="package_toys.ico" />
+    <None Remove="RedCross.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Calculator_30001.ico" />
     <Resource Include="package_toys.ico" />
+    <Resource Include="RedCross.png" />
   </ItemGroup>
 
 </Project>

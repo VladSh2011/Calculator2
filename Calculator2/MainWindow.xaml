@@ -67,7 +67,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" HorizontalAlignment="Left">
-            <Image Source="/package_toys.ico"/>
+            <Image Source="/Calculator_30001.ico"/>
             <Button Content="*" Height="20" Width="20" FontSize="10">
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">
@@ -83,9 +83,11 @@
         <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Right">
             <Button x:Name="HideBtn" Content="_" FontSize="10" Height="20" Width="20" Click="HideBtn_OnClick "/>
             <Button x:Name="MaximizeBtn" Content="[]" FontSize="10" Height="20" Width="20" Click="MaximizeBtn_OnClick"/>
-            <Button x:Name="CloseBtn" Content="" FontSize="10" Height="20" Width="20" Click="CloseBtn_OnClick"/>
+            <Button x:Name="CloseBtn" FontSize="10" Height="20" Width="20" Click="CloseBtn_OnClick">
+                <Image Source="/RedCross.png"/>
+            </Button>
         </StackPanel>
-        <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Text="{Binding Operation}" Style="{StaticResource TextBlock.Style}"/>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Text="{Binding Operation}" Style="{DynamicResource TextBlock.Style}"/>
         <TextBlock Grid.Row="2" Grid.ColumnSpan="4" Style="{DynamicResource TextBlock.Style}" Text="{Binding Operand}"/>
         <TextBlock Grid.Row="2" Grid.ColumnSpan="4" Style="{DynamicResource TextBlock.Style}"
                    Text="Zero division error" Visibility="{Binding HasError, Converter={StaticResource  BoolToVisibilityConverter}}"/>
@@ -123,8 +125,8 @@
                     </EventTrigger>
                 </Button.Triggers>
             </Button>
-            <RadioButton x:Name="DefaultRB" Content="Default theme" Margin="20,0,0,0" Click="DefaultRB_OnClick"/>
-            <RadioButton x:Name="GrayRB" Content="Gray theme" Margin="20,0,0,0" Click="GrayRB_OnClick"/>
+            <RadioButton x:Name="DefaultRB" Content="Default theme" Margin="20,0,0,0" Checked="DefaultRB_Checked" IsChecked="True"/>
+            <RadioButton x:Name="GrayRB" Content="Gray theme" Margin="20,0,0,0" Checked="GrayRB_Checked"/>
         </WrapPanel>
     </Grid>
 </Window>

@@ -34,19 +34,16 @@ namespace Calculator2
         private void MaximizeBtn_OnClick(object sender, RoutedEventArgs e) => WindowState = this.WindowState==WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
 
         private void HideBtn_OnClick(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
-        private void GrayRB_OnClick(object sender, RoutedEventArgs e)
+
+        private void Connect(string style)
         {
-            var file = new Uri("Gray.xaml", UriKind.Relative);
-            ResourceDictionary resourceDict = Application.LoadComponent(file) as ResourceDictionary;
+            var uri = new Uri(style, UriKind.Relative);
+            var resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
             Application.Current.Resources.Clear();
             Application.Current.Resources.MergedDictionaries.Add(resourceDict);
         }
-        private void DefaultRB_OnClick(object sender, RoutedEventArgs e)
-        {
-            var file = new Uri("Default.xaml", UriKind.Relative);
-            ResourceDictionary resourceDict = Application.LoadComponent(file) as ResourceDictionary;
-            Application.Current.Resources.Clear();
-            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
-        }
+
+        private void GrayRB_Checked(object sender, RoutedEventArgs e) => Connect("Gray.xaml");
+        private void DefaultRB_Checked(object sender, RoutedEventArgs e) => Connect("Default.xaml");
     }
 }
