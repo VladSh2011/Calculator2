@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,5 +34,19 @@ namespace Calculator2
         private void MaximizeBtn_OnClick(object sender, RoutedEventArgs e) => WindowState = this.WindowState==WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
 
         private void HideBtn_OnClick(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+        private void GrayRB_OnClick(object sender, RoutedEventArgs e)
+        {
+            var file = new Uri("Gray.xaml", UriKind.Relative);
+            ResourceDictionary resourceDict = Application.LoadComponent(file) as ResourceDictionary;
+            Application.Current.Resources.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+        }
+        private void DefaultRB_OnClick(object sender, RoutedEventArgs e)
+        {
+            var file = new Uri("Default.xaml", UriKind.Relative);
+            ResourceDictionary resourceDict = Application.LoadComponent(file) as ResourceDictionary;
+            Application.Current.Resources.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+        }
     }
 }

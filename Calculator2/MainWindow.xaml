@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator2"
         mc:Ignorable="d"
-        Title="Calculator" Height="450" Width="300" WindowStyle="None" MouseDown="Window_MouseDown" AllowsTransparency="True" Icon="/package_toys.ico">
+        Title="Calculator" Height="450" Width="300" WindowStyle="None" MouseDown="Window_MouseDown" AllowsTransparency="True" Icon="/Calculator_30001.ico">
     <Window.DataContext>
         <local:ViewModel/>
     </Window.DataContext>
@@ -81,9 +81,9 @@
             </Button>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Right">
-            <Button x:Name="HideBtn" Content="_" FontSize="10" Height="20" Width="20" Click="HideBtn_OnClick"/>
+            <Button x:Name="HideBtn" Content="_" FontSize="10" Height="20" Width="20" Click="HideBtn_OnClick "/>
             <Button x:Name="MaximizeBtn" Content="[]" FontSize="10" Height="20" Width="20" Click="MaximizeBtn_OnClick"/>
-            <Button x:Name="CloseBtn" Content="x" FontSize="10" Height="20" Width="20" Click="CloseBtn_OnClick"/>
+            <Button x:Name="CloseBtn" Content="" FontSize="10" Height="20" Width="20" Click="CloseBtn_OnClick"/>
         </StackPanel>
         <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Text="{Binding Operation}" Style="{StaticResource TextBlock.Style}"/>
         <TextBlock Grid.Row="2" Grid.ColumnSpan="4" Style="{DynamicResource TextBlock.Style}" Text="{Binding Operand}"/>
@@ -123,8 +123,8 @@
                     </EventTrigger>
                 </Button.Triggers>
             </Button>
-            <RadioButton x:Name="DefaultRB" Content="Default theme" Margin="20,0,0,0"/>
-            <RadioButton x:Name="GraytRB" Content="Gray theme" Margin="20,0,0,0"/>
+            <RadioButton x:Name="DefaultRB" Content="Default theme" Margin="20,0,0,0" Click="DefaultRB_OnClick"/>
+            <RadioButton x:Name="GrayRB" Content="Gray theme" Margin="20,0,0,0" Click="GrayRB_OnClick"/>
         </WrapPanel>
     </Grid>
 </Window>
